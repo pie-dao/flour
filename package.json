@@ -1,8 +1,8 @@
 {
-  "name": "@aragon/minime",
+  "name": "@pie-dao/flour",
   "version": "1.0.0",
   "private": false,
-  "author": "Jordi Baylina",
+  "author": "Mick de Graaf",
   "license": "GPL-3.0-or-later",
   "files": [
     "/abi",
