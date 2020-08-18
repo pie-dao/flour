@@ -213,10 +213,6 @@ contract MiniMeToken is Controlled {
         updateValueAtNow(balances[_to], previousBalanceTo + _amount);
         // An event to make the transfer easy to find on the blockchain
         Transfer(_from, _to, _amount);
-
-        // Move delegate rep tokens
-        _moveDelegates(_from, _to, _amount);
-
         return true;
     }
 
@@ -404,12 +400,10 @@ contract MiniMeToken is Controlled {
         if (srcRep != dstRep && amount > 0) {
             if (srcRep != address(0)) {
                 // burn delegate rep token
-                // TODO implement burn of rep token
             }
 
             if (dstRep != address(0)) {
                 // mint delegate rep token
-                // TODO implement mint of rep token
             }
         }
     }
@@ -430,10 +424,6 @@ contract MiniMeToken is Controlled {
         updateValueAtNow(totalSupplyHistory, curTotalSupply + _amount);
         updateValueAtNow(balances[_owner], previousBalanceTo + _amount);
         Transfer(0, _owner, _amount);
-        
-        // Move delegate rep tokens
-        _moveDelegates(address(0), _owner, _amount);
-
         return true;
     }
 
@@ -450,10 +440,6 @@ contract MiniMeToken is Controlled {
         updateValueAtNow(totalSupplyHistory, curTotalSupply - _amount);
         updateValueAtNow(balances[_owner], previousBalanceFrom - _amount);
         Transfer(_owner, 0, _amount);
-
-        // Move delegate rep tokens
-        _moveDelegates(_owner, address(0), _amount);
-
         return true;
     }
 
