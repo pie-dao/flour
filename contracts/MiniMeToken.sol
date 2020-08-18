@@ -61,9 +61,7 @@ contract MiniMeToken is Controlled {
     uint8 public decimals;             //Number of decimals of the smallest unit
     string public symbol;              //An identifier: e.g. REP
     string public version = "MMT_0.1"; //An arbitrary versioning scheme
-    
-    /// @notice A record of each accounts delegate
-    mapping (address => address) public delegates;
+
 
     /// @dev `Checkpoint` is the structure that attaches a block number to a
     ///  given value, the block number attached is the one that last changed the
@@ -377,38 +375,6 @@ contract MiniMeToken is Controlled {
     }
 
 ////////////////
-// Delegation methods
-////////////////
-
-
-    /// @notice Delegate votes from `msg.sender` to `delegatee`
-    /// @param delegatee The address to delegate votes to
-    function delegate(address delegatee) public {
-        return _delegate(msg.sender, delegatee);
-    }
-
-    function _delegate(address delegator, address delegatee) internal {
-        address currentDelegate = delegates[delegator];
-        uint256 delegatorBalance = balanceOfAt(_from, block.number);;
-        delegates[delegator] = delegatee;
-
-        DelegateChanged(delegator, currentDelegate, delegatee);
-        _moveDelegates(currentDelegate, delegatee, delegatorBalance);
-    }
-
-    function _moveDelegates(address srcRep, address dstRep, uint256 amount) internal {
-        if (srcRep != dstRep && amount > 0) {
-            if (srcRep != address(0)) {
-                // burn delegate rep token
-            }
-
-            if (dstRep != address(0)) {
-                // mint delegate rep token
-            }
-        }
-    }
-
-////////////////
 // Generate and destroy tokens
 ////////////////
 
@@ -563,8 +529,7 @@ contract MiniMeToken is Controlled {
         address indexed _spender,
         uint256 _amount
         );
-    // @notice An event thats emitted when an account changes its delegate
-    event DelegateChanged(address indexed delegator, address indexed fromDelegate, address indexed toDelegate);
+
 }
 
 
